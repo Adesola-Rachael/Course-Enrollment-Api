@@ -32,7 +32,7 @@ class AuthController extends Controller
             'password'=>'required',
         ]);
         if($validateUser->fails()){
-            return $this->setResponse($validateUser->errors(),null, StatusCode::VALIDATION);
+            return $this->apiResponse($validateUser->errors(),null, StatusCode::VALIDATION);
         }
         try {  
             $user =  User::create([
@@ -40,7 +40,7 @@ class AuthController extends Controller
                 'email' => $request->get('email'),
                 'password' => Hash::make($request->get('password')),
             ]);
-            return $this->setResponse('User Created Successfully',$user,  StatusCode::CREATED);
+            return $this->apiResponse('User Created Successfully',$user,  StatusCode::CREATED);
        
         } catch (JWTException $e) {                
             throw new Exception($e->getMessage()); 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         ]);
         try {  
             if (!$token = auth()->attempt($credentials)) {  
-                return $this->setResponse('You Are Unathorized', null, StatusCode::UNAUTHORIZED);
+                return $this->apiResponse('You Are Unathorized', null, StatusCode::UNAUTHORIZED);
             }            
         } catch (JWTException $e) {                
             throw new Exception($e->getMessage()); 
@@ -71,6 +71,6 @@ class AuthController extends Controller
                 'token_type' => 'bearer',  
                 'expires_in' => config('jwt.ttl')        
             ];
-            return $this->setResponse('User login Successfully', $data, StatusCode::OK);
+            return $this->apiResponse('User logined Successfully', $data, StatusCode::OK);
     }
 }

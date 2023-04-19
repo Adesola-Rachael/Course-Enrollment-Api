@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 trait ResponseTrait{
-    public function setResponse($message, $data = [], $status )
+    public function apiResponse($message, $data = [], $status )
     {
         return response()->json([
             'message' => $message,
