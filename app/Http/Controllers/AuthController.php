@@ -17,7 +17,6 @@ use App\Traits\UserAuthenticationTrait;
 use Tymon\JWTAuth\Exceptions\JWTException;
 // use App\Http\Controllers\Controller;
 
-
 class AuthController extends Controller
 {
     use ResponseTrait;
@@ -84,7 +83,6 @@ class AuthController extends Controller
                 'token_type' => 'bearer',  
                 'expires_in' => config('jwt.ttl')        
             ];
-
             return $this->setResponse( 'User login Successfully', $data, StatusCode::OK);
         }
 

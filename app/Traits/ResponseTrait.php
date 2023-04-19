@@ -9,7 +9,6 @@ trait ResponseTrait{
             'message' => $message,
             'data' => $data,
             'statusCode' => $status,
-
         ]);
     }
 }
