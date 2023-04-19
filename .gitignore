@@ -9,3 +9,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+composer.lock
+app/.DS_Store
+app/Http/.DS_Store
+app/Http/Controllers/.DS_Store
