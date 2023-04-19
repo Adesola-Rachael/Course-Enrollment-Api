@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\V1\ApiAuthController;
 
 
 

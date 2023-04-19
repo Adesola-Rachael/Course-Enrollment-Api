@@ -3,20 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Exception;
+use Validator;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use App\Interfaces\StatusCode;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserAuthRequest;
 use App\Traits\UserAuthenticationTrait;
+use Tymon\JWTAuth\Exceptions\JWTException;
 // use App\Http\Controllers\Controller;
 
 
 class AuthController extends Controller
 {
-    use ResponseTrait,UserAuthenticationTrait;
+    use ResponseTrait;
 
     protected $RegisterService;
       /**
@@ -31,16 +35,26 @@ class AuthController extends Controller
     }
    
     public function register(Request $request){
-
-        $validateUser=$this->getValidator($request);
-
+        $validateUser = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required',
+            
+        ]);
         if($validateUser->fails()){
-            return $this->failure($validateUser->errors(),StatusCode::VALIDATION);
+            return $this->setResponse($validateUser->errors(),null, StatusCode::VALIDATION);
         }
-       $user= $this->RegisterUser($request);
-
-        return $this->success('User Created Successfully', $user, StatusCode::CREATED);
-
+        try {  
+            $user =  User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+            ]);
+            return $this->setResponse('User Created Successfully',$user,  StatusCode::CREATED);
+       
+        } catch (JWTException $e) {                
+            throw new Exception($e->getMessage()); 
+        }
    }
 
     /**
@@ -48,15 +62,31 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials=$request->validate([
+            'email'=>'required',    
+            'password'=>'required'
 
-        if (! $token = auth()->attempt($credentials)) {
-            return $this->failure('You are Unauthorized', StatusCode::UNAUTHORIZED);
+        ]);
+
+        try {  
+            if (! $token = auth()->attempt($credentials)) {  
+                return $this->setResponse(   'You Are Unathorized', null, StatusCode::UNAUTHORIZED);
+            }            
+        } catch (JWTException $e) {                
+            throw new Exception($e->getMessage()); 
         }
-        return $this->respondWithToken($token);
-    }
+
+        $data = [ 
+                'auth_user' => auth()->user(),
+                'access_token' => $token,            
+                'token_type' => 'bearer',  
+                'expires_in' => config('jwt.ttl')        
+            ];
+
+            return $this->setResponse( 'User login Successfully', $data, StatusCode::OK);
+        }
 
    
 }
