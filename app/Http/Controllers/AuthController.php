@@ -8,14 +8,9 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use App\Interfaces\StatusCode;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\UserAuthRequest;
-use App\Traits\UserAuthenticationTrait;
 use Tymon\JWTAuth\Exceptions\JWTException;
-// use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
