@@ -71,6 +71,6 @@ class AuthController extends Controller
                 'token_type' => 'bearer',  
                 'expires_in' => config('jwt.ttl')        
             ];
-            return $this->apiResponse('User logined Successfully', $data, StatusCode::OK);
+            return $this->apiResponse('User logged In Successfully', $data, StatusCode::OK);
     }
 }
