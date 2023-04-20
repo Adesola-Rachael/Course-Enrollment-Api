@@ -22,11 +22,6 @@ class CourseCreateJob implements ShouldQueue
      *
      * @return void
      */
-    protected $createCourse;
-    // public function __construct(Course $createCourse)
-    // {
-    //     $this->createCourse=$createCourse;
-    // }
 
     /**
      * Execute the job.
@@ -35,6 +30,6 @@ class CourseCreateJob implements ShouldQueue
      */
     public function handle()
     {
-         factory(Course::class,10)->create();
+         factory(Course::class,50)->create();
     }
 }
