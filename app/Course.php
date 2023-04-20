@@ -12,7 +12,5 @@ class Course extends Model
         'title', 'category','course_code'
     ];
 
-    protected $casts = [
-        'category' => CourseCategoryEnum::class
-    ];
+    
 }
