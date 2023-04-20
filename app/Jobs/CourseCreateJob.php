@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Jobs;
-
 use App\Course;
 use App\Traits\ResponseTrait;
 use Illuminate\Bus\Queueable;

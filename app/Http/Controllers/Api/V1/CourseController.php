@@ -13,16 +13,9 @@ use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use App\Services\CreateCourseService;
 
-
 class CourseController extends Controller 
 {
     public function createCourse(){
-        try {  
-           if( !CourseCreateJob::dispatch()){
-            return $this->apiResponse('Something Went Wrong',null, StatusCode::BAD_REQUEST);
-           } 
-        }catch (Exception $e) {                
-            throw new Exception($e->getMessage()); 
-        }
+        CourseCreateJob::dispatch();  
     }
 }

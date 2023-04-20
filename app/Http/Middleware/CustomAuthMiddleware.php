@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Middleware;
-
 use App\Traits\ResponseTrait;
 use Closure;
 use App\Interfaces\StatusCode;
@@ -24,6 +23,5 @@ class CustomAuthMiddleware
         } else {
             return $this->apiResponse('You Are Unathorized', null, StatusCode::UNAUTHORIZED);
         }
-
     }
 }

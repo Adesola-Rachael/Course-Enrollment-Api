@@ -46,7 +46,7 @@ class AuthController extends Controller
             throw new Exception($e->getMessage()); 
         }
     }
-
+    
     /**
      * Get a JWT via given credentials.
      *@param Request $request

@@ -8,5 +8,4 @@ interface StatusCode
     const VALIDATION = 422;
     const UNAUTHORIZED = 401;
     const BAD_REQUEST = 400;
-
 }
