@@ -23,16 +23,16 @@ use App\Enums\CourseCategoryEnum;
 
 $factory->define(App\Course::class, function (Faker $faker) {
 
-    $course=new CourseCategoryEnum;
-    $course=$course->values();
+    $course = new CourseCategoryEnum;
+    $course = $course->values();
     $str_result = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $subject= substr(str_shuffle($str_result),0, 3);
-    $coueseCode=$subject.' '.rand(100,999);
+    $subject = substr(str_shuffle($str_result),0, 3);
+    $coueseCode = $subject. ' ' .rand(100,999);
     return [
         'title' => $faker->title,
         'category' => $faker->randomElement($course),
         'course_code' => $coueseCode, 
-        'text'=> $faker->name,
+        'text' => $faker->name,
     ];
 });
 

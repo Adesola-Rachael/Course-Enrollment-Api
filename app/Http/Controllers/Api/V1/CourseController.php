@@ -15,7 +15,8 @@ use App\Services\CreateCourseService;
 
 class CourseController extends Controller 
 {
-    public function createCourse(){
+    public function createCourse()
+    {
         CourseCreateJob::dispatch();  
     }
 }
