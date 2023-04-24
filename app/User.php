@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Course;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -46,5 +48,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function courses():BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'user_course')->withPivot('created_at');
+
     }
 }
