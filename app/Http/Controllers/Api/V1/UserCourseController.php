@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Course;
-use Illuminate\Http\Request;
+use App\Models\Course;
 use App\Traits\ResponseTrait;
 use App\Interfaces\StatusCode;
 use App\Http\Controllers\Controller;
