@@ -25,7 +25,7 @@ class UserCourseController extends Controller
        return $this->apiResponse('Course Created Successfully',$newCoursesRegistered , StatusCode::CREATED);
     }
     public function listOfAllCourses(){
-        $courses=Course::with('users')->get()->toArray();
+        $courses = Course::with('users')->get()->toArray();
         return $this->apiResponse('Courses Listed Successfully',$courses , StatusCode::OK);
     }
 }
