@@ -11,4 +11,3 @@ Route::group(['middleware' => 'api', 'prefix' => 'project'], function(){
         Route::get('list', 'UserCourseController@listOfAllCourses');
     });
 });
-

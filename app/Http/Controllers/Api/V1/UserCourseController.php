@@ -22,7 +22,7 @@ class UserCourseController extends Controller
        $retrieveAllNewlyRegisteredCourse = collect($getAllUserCourse);
        $getNewlyRegisterdCourse = $retrieveAllNewlyRegisteredCourse->whereIn('id', $roleIds);
        $newCoursesRegistered = $getNewlyRegisterdCourse;
-            return $this->apiResponse('Course Created Successfully',$newCoursesRegistered , StatusCode::CREATED);
+       return $this->apiResponse('Course Created Successfully',$newCoursesRegistered , StatusCode::CREATED);
     }
     public function listOfAllCourses(){
         $courses=Course::with('users')->get()->toArray();
