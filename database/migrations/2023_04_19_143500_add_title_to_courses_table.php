@@ -14,10 +14,9 @@ class AddTitleToCoursesTable extends Migration
      */
     public function up()
     {
-        
         Schema::table('courses', function (Blueprint $table) {
-            $course=new CourseCategoryEnum;
-            $course=$course->values();
+            $course = new CourseCategoryEnum;
+            $course = $course->values();
             $table->string('title')->after('id');
             $table->enum('category', $course)->before('created_at')->after('title');
             $table->string('course_code')->before('created_at')->after('category');
@@ -31,8 +30,6 @@ class AddTitleToCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('courses');
     }
 }
