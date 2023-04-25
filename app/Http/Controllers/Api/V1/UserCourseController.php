@@ -19,10 +19,10 @@ class UserCourseController extends Controller
        $courseIds = $request->ids;
        $user->courses()->attach($courseIds); 
        $getNewlyRegisterdCourse = collect($user->courses)->whereIn('id', $courseIds);
-       return $this->apiResponse('Course Created Successfully',$getNewlyRegisterdCourse , StatusCode::CREATED);
+       return $this->apiResponse('Course Created Successfully',$getNewlyRegisterdCourse , StatusCode::OK);
     }
     public function listOfAllCourses(){
-        $courses = Course::with('users')->get()->toArray();
+        $courses = Course::with('users')->get();
         return $this->apiResponse('Courses Listed Successfully',$courses , StatusCode::OK);
     }
 }
