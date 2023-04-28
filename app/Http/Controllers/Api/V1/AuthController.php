@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\User;
+use App\Models\User;
 use Exception;
 use Validator;
 use Illuminate\Http\Request;

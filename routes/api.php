@@ -9,5 +9,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'project'], function(){
         Route::get('create', 'CourseController@createCourse')->name('create');
         Route::post('enrol', 'UserCourseController@enrolCourse');
         Route::get('list', 'UserCourseController@listOfAllCourses');
+        Route::get('export', 'ExportCourseController@ExportCourses');
     });
 });

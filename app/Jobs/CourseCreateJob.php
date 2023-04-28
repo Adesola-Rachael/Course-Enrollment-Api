@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Jobs;
-use App\Course;
+use App\Models\Course;
 use App\Traits\ResponseTrait;
 use Illuminate\Bus\Queueable;
 use App\Interfaces\StatusCode;
@@ -15,7 +15,7 @@ class CourseCreateJob implements ShouldQueue
 {
     use ResponseTrait;
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    
+
     public function handle()
     {
          factory(Course::class,50)->create();
