@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller 
 {
+  /**
+   * Dispatche jobs to create courses
+   * 
+   * @return void
+   */
     public function createCourse()
     {
         CourseCreateJob::dispatch();  

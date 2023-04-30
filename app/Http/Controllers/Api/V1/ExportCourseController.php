@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 
 class ExportCourseController extends Controller
 {
+    /**
+     * Export all courses
+     */
     public function exportCourses(){
         return (new CoursesExport)->download('course.csv');
     }

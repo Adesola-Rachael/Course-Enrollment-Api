@@ -18,7 +18,7 @@ class CreateUserCoursesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('course_id')->unique();
+            $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')
             ->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();

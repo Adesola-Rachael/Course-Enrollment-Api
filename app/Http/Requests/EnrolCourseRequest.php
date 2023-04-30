@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EnrolCourseRequest extends FormRequest
@@ -24,7 +25,7 @@ class EnrolCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids' => 'required|array|unique:user_course,course_id',
+            'ids' => 'required|array|unique:user_course,course_id,',
             'ids.*' => 'exists:courses,id',  
         ];
     }

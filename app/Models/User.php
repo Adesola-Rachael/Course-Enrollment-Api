@@ -50,8 +50,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
     
+    /**
+     * Users belongs to many courses relationship
+     * 
+     * @return mixed
+     */
     public function courses():BelongsToMany
     {
-        return $this->belongsToMany(Course::class, 'user_course')->withPivot('created_at');
+        return $this->belongsToMany(Course::class, 'user_course')->withTimestamps();
     }
 }
