@@ -47,15 +47,18 @@ class UserCourseController extends Controller
     */
     public function getCourses($courses)
     {
-        $getdata = [];
+        $response = [];
         foreach($courses as $course) {
-            $data["course_title"] = $course->title;
-            $data["course_code"] = $course->course_code;
-            foreach($course->users ?? [] as $user){
-                $data['date_enrolled'] = $user->pivot->created_at ?? null;
+           $enrolment_date = null; 
+            foreach($course->users as $user) {
+                $enrolment_date = date('Y-m-d', strtotime($user->pivot->created_at ?? null));
             }
-            $getdata[] = $data;
+            $response[] = [
+                'course_title' => $course->title,
+                'course_code' => $course->course_code,
+                'date_enrolled' => $enrolment_date
+            ];
         }
-        return $getdata;
+        return $response;
     }
 }
