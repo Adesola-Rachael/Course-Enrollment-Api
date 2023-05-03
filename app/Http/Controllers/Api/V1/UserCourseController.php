@@ -7,6 +7,7 @@ use App\Traits\ResponseTrait;
 use App\Interfaces\StatusCode;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EnrolCourseRequest;
+use App\Http\Resources\EnrolCourseResource;
 
 class UserCourseController extends Controller
 {
@@ -21,10 +22,10 @@ class UserCourseController extends Controller
     public function enrolCourse(EnrolCourseRequest $request)
     {
        $user = auth()->user();
-       $courseIds = $request->ids;
-       $user->courses()->sync($courseIds); 
-       $getNewlyRegisterdCourse = collect($user->courses)->whereIn('id', $courseIds);
-       return $this->apiResponse('Course Created Successfully', $getNewlyRegisterdCourse , StatusCode::OK);
+       $course_ids = $request->ids;
+       $user->courses()->sync($course_ids); 
+       $get_newly_registerd_course = collect($user->courses)->whereIn('id', $course_ids);
+       return $this->apiResponse('Course Created Successfully', EnrolCourseResource::collection($get_newly_registerd_course) , StatusCode::OK);
     }
 
     /**
@@ -51,7 +52,7 @@ class UserCourseController extends Controller
         foreach($courses as $course) {
            $enrolment_date = null; 
             foreach($course->users as $user) {
-                $enrolment_date = date('Y-m-d', strtotime($user->pivot->created_at ?? null));
+                $enrolment_date =  date_format($user->pivot->created_at, "Y-m-d H:i:s") ;
             }
             $response[] = [
                 'course_title' => $course->title,

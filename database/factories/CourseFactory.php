@@ -19,18 +19,17 @@ use App\Enums\CourseCategoryEnum;
 |
 */
 
-$factory->define(App\Course::class, function (Faker $faker) {
+$factory->define(App\Models\Course::class, function (Faker $faker) {
 
     $course = new CourseCategoryEnum;
     $course = $course->values();
     $str_result = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $subject = substr(str_shuffle($str_result), 0, 3);
-    $coueseCode = $subject. ' ' .rand(100,999);
+    $course_code = $subject. ' ' .rand(100,999);
     return [
-        'title' => $faker->title,
+        'title' => $faker->name . ' '.'course',
         'category' => $faker->randomElement($course),
-        'course_code' => $coueseCode, 
+        'course_code' => $course_code, 
         'text' => $faker->name,
     ];
 });
-
