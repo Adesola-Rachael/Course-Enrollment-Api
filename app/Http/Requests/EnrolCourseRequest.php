@@ -26,8 +26,9 @@ class EnrolCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids' => 'required|array',
-            'ids.*' => 'exists:courses,id'
+            // course_id
+            'courses' => 'required|array',
+            'courses.*' => 'exists:courses,id'
         ];
     }
 }

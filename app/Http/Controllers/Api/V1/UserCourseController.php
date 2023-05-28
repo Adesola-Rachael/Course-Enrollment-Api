@@ -22,9 +22,12 @@ class UserCourseController extends Controller
     public function enrolCourse(EnrolCourseRequest $request)
     {
        $user = auth()->user();
-       $course_ids = $request->ids;
-       $user->courses()->sync($course_ids); 
-       $get_newly_registerd_course = collect($user->courses)->whereIn('id', $course_ids);
+       $course_ids = $request->courses;
+    //    sync without detach
+       $user->courses()->syncWithoutDetaching($course_ids); 
+    //    applying a filter on builder and collection
+       $get_newly_registerd_course = $user->courses->whereIn('id', $course_ids);
+    //    layered architecture /more on design patterns
        return $this->apiResponse('Course Created Successfully', EnrolCourseResource::collection($get_newly_registerd_course) , StatusCode::OK);
     }
 
@@ -52,6 +55,8 @@ class UserCourseController extends Controller
         foreach($courses as $course) {
            $enrolment_date = null; 
             foreach($course->users as $user) {
+                // n+1 problem
+                // refactor to collection
                 $enrolment_date =  date_format($user->pivot->created_at, "Y-m-d H:i:s") ;
             }
             $response[] = [

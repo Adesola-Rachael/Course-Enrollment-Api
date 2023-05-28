@@ -15,6 +15,7 @@ class EnrolCourseResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'course_id' =>$this->id,
             'course_title' =>$this->title,
             'course_code' =>$this->course_code,
             'course_category' =>$this->category
